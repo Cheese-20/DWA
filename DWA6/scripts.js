@@ -24,6 +24,21 @@ const data = {
   'search-Form' : document.querySelector('[data-search-form]'),
   'list-Msg' : document.querySelector('[data-list-message]'),
 }
+/**
+ * 
+ * @param {string} theme 
+ */
+const toggleTheme = (theme) => {
+
+if (theme === 'night') {
+        document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
+        document.documentElement.style.setProperty('--color-light', '10, 10, 20');
+    } else {
+        document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
+        document.documentElement.style.setProperty('--color-light', '255, 255, 255');
+    }
+
+} 
 
 const starting = document.createDocumentFragment();
 /**
@@ -92,12 +107,10 @@ data['search-Authors'].appendChild(Createfragment(authors, 'Authors'))
 
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.querySelector('[data-settings-theme]').value = 'night'
-    document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
-    document.documentElement.style.setProperty('--color-light', '10, 10, 20');
+    toggleTheme('night')
 } else {
     document.querySelector('[data-settings-theme]').value = 'day'
-    document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
-    document.documentElement.style.setProperty('--color-light', '255, 255, 255');
+    toggleTheme('day')
 }
 
 data['list-button'].innerText = `Show more (${books.length - BOOKS_PER_PAGE})`
@@ -134,13 +147,7 @@ data['settings-Form'].addEventListener('submit', (event) => {
     const formData = new FormData(event.target)
     const { theme } = Object.fromEntries(formData)
 
-    if (theme === 'night') {
-        document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
-        document.documentElement.style.setProperty('--color-light', '10, 10, 20');
-    } else {
-        document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
-        document.documentElement.style.setProperty('--color-light', '255, 255, 255');
-    }
+    toggleTheme(theme)
     
     data['settings-Overlay'].open = false
 })
