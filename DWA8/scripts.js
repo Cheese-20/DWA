@@ -50,57 +50,60 @@ const starting = document.createDocumentFragment();
  * @param {string} title
  * @returns {HTMLElement}
  */
-const createElement = (author, id, image, title) => {
-  const element = document.createElement("button");
-  element.classList = "preview";
-  element.setAttribute("data-preview", id);
+// const createElement = (author, id, image, title) => {
+//   const element = document.createElement("button");
+//   element.classList = "preview";
+//   element.setAttribute("data-preview", id);
 
-  element.innerHTML = `
-      <img
-          class="preview__image"
-          src="${image}"
-      />
+//   element.innerHTML = `
+//       <img
+//           class="preview__image"
+//           src="${image}"
+//       />
       
-      <div class="preview__info">
+//       <div class="preview__info">
+//           <h3 class="preview__title">${title}</h3>
+//           <div class="preview__author">${authors[author]}</div>
+//       </div>
+//   `;
+//   return element;
+// };
+
+// template
+const template =  document.createElement('template');
+template.innerHTML =
+`<button>
+    <img
+      class="preview__image"
+        src="${image}"/>
+          
+    <div class="preview__info">
           <h3 class="preview__title">${title}</h3>
           <div class="preview__author">${authors[author]}</div>
-      </div>
-  `;
-  return element;
-};
+    </div>
+    
+  </button>`;
+
 /**
- * Starting preview
+ * custom element 
  */
 
+class customPreviewHtml extends HTMLElement {
+#image = this.getAttribute("image");
+#title = this.getAttribute("title");
+#author = this.getAttribute("author");
+
+  constructor() {
+    super()
+    const shadow = this.attachShadow({mode: 'open'});
+      const {content} = template;
+      shadow.appendChild(content.cloneNode(true));
+      console.log('works');}
+}
+
+ customElements.define("preview-books", customPreviewHtml);
+
  
-
-// class customPreviewHtml extends HTMLElement {
-//   constructor() {
-//     super()
-//     const previewFrag = document.createDocumentFragment();
-// for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)){
-//     const element = document.createElement("button");
-//     element.classList = "preview";
-//     element.setAttribute("data-preview", id);
-
-//     element.innerHTML =  `
-//         <img
-//         class="preview__image"
-//         src="${image}"/>
-    
-//      <div class="preview__info">
-//         <h3 class="preview__title">${title}</h3>
-//         <div class="preview__author">${authors[author]}</div>
-//         </div>;`
-//     console.log(id);
-//     previewFrag.appendChild(element)
-//     };
-
-//     this.innerHTML = previewFrag
-//   }
-// }
-
-//   customElements.define("preview-books", customPreviewHtml );
 
 /**
  * Fragments for the search and filter options being created
