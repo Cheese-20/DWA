@@ -126,52 +126,15 @@ template.innerHTML =
 
  // custom element 
 class customPreviewHtml extends HTMLElement {
-  /**
-   * @type {string} 
-   */
-#image = this.getAttribute("pic");
-  /**
-   * @type {string} 
-   */
-#title = this.getAttribute("title");
-  /**
-   * @type {string} 
-   */
-#author = this.getAttribute("author");
-
-#elements = {
-  /**
-   * @type {undefined | HTMLElement}
-   */
-  images: undefined,
-  /**
-   * @type {undefined | HTMLElement}
-   */
-  titles: undefined,
-  /**
-   * @type {undefined | HTMLElement}
-   */
-  authors: undefined
-}
+ 
 
   constructor() {
     super()
     const shadow = this.attachShadow({mode: 'open'});
       const {content} = template;
       shadow.appendChild(content.cloneNode(true));
-      console.log(this.#image,this.#title,this.#author)}
-
-      connectedcallback(){
-        this.#elements = {
-          images: this.shadow.querySelector('[data-images]'),
-          titles: this.shadow.querySelector('[data-titles]'),
-          authors : this.shadow.querySelector('[data-authors]')
-        };
-    
-        this.#elements.authors.innerHTML = this.#author ;
-        this.#elements.images.innerText = this.#image ;
-        this.#elements.titles.innerHTML = this.#title;
-      }
+      console.log('works')}
+      
 }
 
  customElements.define("preview-books", customPreviewHtml);
