@@ -50,55 +50,89 @@ const starting = document.createDocumentFragment();
  * @param {string} title
  * @returns {HTMLElement}
  */
-// const createElement = (author, id, image, title) => {
-//   const element = document.createElement("button");
-//   element.classList = "preview";
-//   element.setAttribute("data-preview", id);
+const createElement = (author, id, image, title) => {
+  const element = document.createElement("button");
+  element.classList = "preview";
+  element.setAttribute("data-preview", id);
 
-//   element.innerHTML = `
-//       <img
-//           class="preview__image"
-//           src="${image}"
-//       />
+  element.innerHTML = `
+      <img
+          class="preview__image"
+          src="${image}"
+      />
       
-//       <div class="preview__info">
-//           <h3 class="preview__title">${title}</h3>
-//           <div class="preview__author">${authors[author]}</div>
-//       </div>
-//   `;
-//   return element;
-// };
+      <div class="preview__info">
+          <h3 class="preview__title">${title}</h3>
+          <div class="preview__author">${authors[author]}</div>
+      </div>
+  `;
+  return element;
+};
 
 // template
 const template =  document.createElement('template');
 template.innerHTML =
 `<button>
     <img
-      class="preview__image"
-        src="${image}"/>
+      class="preview__image" src="" data-images/>
           
     <div class="preview__info">
-          <h3 class="preview__title">${title}</h3>
-          <div class="preview__author">${authors[author]}</div>
+          <h3 class="preview__title" data-titles></h3>
+          <div class="preview__author" data-authors></div>
     </div>
     
   </button>`;
 
-/**
- * custom element 
- */
 
+ // custom element 
 class customPreviewHtml extends HTMLElement {
-#image = this.getAttribute("image");
+  /**
+   * @type {string} 
+   */
+#image = this.getAttribute("pic");
+  /**
+   * @type {string} 
+   */
 #title = this.getAttribute("title");
+  /**
+   * @type {string} 
+   */
 #author = this.getAttribute("author");
+
+#elements = {
+  /**
+   * @type {undefined | HTMLElement}
+   */
+  images: undefined,
+  /**
+   * @type {undefined | HTMLElement}
+   */
+  titles: undefined,
+  /**
+   * @type {undefined | HTMLElement}
+   */
+  authors: undefined
+}
 
   constructor() {
     super()
     const shadow = this.attachShadow({mode: 'open'});
       const {content} = template;
       shadow.appendChild(content.cloneNode(true));
-      console.log('works');}
+      console.log(this.#image,this.#title,this.#author)}
+
+      connectedcallback(){
+        this.#elements = {
+          images: this.shadow.querySelector('[data-images]'),
+          titles: this.shadow.querySelector('[data-titles]'),
+          authors : this.shadow.querySelector('[data-authors]')
+        };
+    
+        this.#elements.authors.innerText = this.#author ;
+        this.#elements.images.innerText = this.#image ;
+        this.#elements.titles.innerText = this.#title;
+      }
+    
 }
 
  customElements.define("preview-books", customPreviewHtml);
