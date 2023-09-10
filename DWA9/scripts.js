@@ -112,13 +112,11 @@ template.innerHTML =
 
 
 <button class="preview">
-    <img
-      class="preview__image" data-images
-        src="{image}"/>
-          
+   
+        <slot class="preview__image" name="images"></slot>
     <div class="preview__info">
-          <h3 class="preview__title" data-titles></h3>
-          <div class="preview__author" data-authors></div>
+          <h3 class="preview__title" data-titles> <slot name="title"></slot> </h3>
+          <div class="preview__author" data-authors> <slot name="author" ></slot>  </div>
     </div>
     
   </button>`;
