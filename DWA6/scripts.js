@@ -51,7 +51,7 @@ const bookFactory = () => {
  * @param {string} id
  * @param {string} image
  * @param {string} title
- * @returns {HTMLElement}
+ * @returns {object} 
  */
   const createElement = (author, id, image, title) => {
     const element = document.createElement("button");
@@ -72,9 +72,12 @@ const bookFactory = () => {
     return element;
     };
 
+ const bookObj = {
+  createElement
+ }
 
 
-return createElement;
+return bookObj;
 }
 
 /**

@@ -137,6 +137,7 @@ class customPreviewHtml extends HTMLElement {
 
  customElements.define("preview-books", customPreviewHtml);
 
+ 
 /**
  * Fragments for the search and filter options being created
  * @param {object} type
