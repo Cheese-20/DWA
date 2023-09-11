@@ -42,6 +42,9 @@ const toggleTheme = (theme) => {
 };
 
 const starting = document.createDocumentFragment();
+
+
+const bookFactory = () => { 
 /**
  *
  * @param {string} author
@@ -50,24 +53,30 @@ const starting = document.createDocumentFragment();
  * @param {string} title
  * @returns {HTMLElement}
  */
-const createElement = (author, id, image, title) => {
-  const element = document.createElement("button");
-  element.classList = "preview";
-  element.setAttribute("data-preview", id);
+  const createElement = (author, id, image, title) => {
+    const element = document.createElement("button");
+    element.classList = "preview";
+    element.setAttribute("data-preview", id);
 
-  element.innerHTML = `
-      <img
-          class="preview__image"
-          src="${image}"
-      />
-      
-      <div class="preview__info">
-          <h3 class="preview__title">${title}</h3>
-          <div class="preview__author">${authors[author]}</div>
-      </div>
-  `;
-  return element;
-};
+    element.innerHTML = `
+        <img
+            class="preview__image"
+            src="${image}"
+        />
+        
+        <div class="preview__info">
+            <h3 class="preview__title">${title}</h3>
+            <div class="preview__author">${authors[author]}</div>
+        </div>
+    `;
+    return element;
+    };
+
+
+
+return createElement;
+}
+
 /**
  * Starting preview
  */
