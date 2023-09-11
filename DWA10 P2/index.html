@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tally counter</title>
+
+    <link rel="stylesheet" href="./styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@500;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Shoelace  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.8.0/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.8.0/cdn/shoelace-autoloader.js"></script>
+    <!-- end of shoelace -->
+
+    <script src="./script.js" defer></script>
+
+  </head>
+  <body>
+    <header class="head">
+      <h1>Tally Counter</h1>
+    </header>
+
+    <main class="counter">
+        <input class="counter_value" data-key="number" readonly value="0">
+        <div class="counter_actions">
+        <!-- <button class="counter_btn counter__button_first" data-key="Subtract">-</button> -->
+        <sl-button data-key="Subtract">- </sl-button>
+        <sl-button data-key="Add">+ </sl-button>
+        <sl-button data-key="reset">reset</sl-button>
+
+
+        <!-- <button class="counter_btn" data-key="Add">+</button> -->
+        </div>
+    </main>
+    <footer>
+        Inspired by <a class="footer_link" href="https://tallycount.app/"> Tally count</a>. This is a practice project for javascript
+    </footer>
+  </body> 
+</html>
