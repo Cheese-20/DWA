@@ -112,11 +112,13 @@ template.innerHTML =
 
 
 <button class="preview">
-   
-        <slot class="preview__image" name="images"></slot>
+    <img
+      class="preview__image" data-images
+        src="{image}"/>
+          
     <div class="preview__info">
-          <h3 class="preview__title" data-titles> <slot name="title"></slot> </h3>
-          <div class="preview__author" data-authors> <slot name="author" ></slot>  </div>
+          <h3 class="preview__title" data-titles></h3>
+          <div class="preview__author" data-authors></div>
     </div>
     
   </button>`;
@@ -124,20 +126,56 @@ template.innerHTML =
 
  // custom element 
 class customPreviewHtml extends HTMLElement {
- 
+  /**
+   * @type {string} 
+   */
+#image = this.getAttribute("pic");
+  /**
+   * @type {string} 
+   */
+#title = this.getAttribute("title");
+  /**
+   * @type {string} 
+   */
+#author = this.getAttribute("author");
+
+#elements = {
+  /**
+   * @type {undefined | HTMLElement}
+   */
+  images: undefined,
+  /**
+   * @type {undefined | HTMLElement}
+   */
+  titles: undefined,
+  /**
+   * @type {undefined | HTMLElement}
+   */
+  authors: undefined
+}
 
   constructor() {
     super()
     const shadow = this.attachShadow({mode: 'open'});
       const {content} = template;
       shadow.appendChild(content.cloneNode(true));
-      console.log('works')}
-      
+      console.log(this.#image,this.#title,this.#author)}
+
+      connectedcallback(){
+        this.#elements = {
+          images: this.shadow.querySelector('[data-images]'),
+          titles: this.shadow.querySelector('[data-titles]'),
+          authors : this.shadow.querySelector('[data-authors]')
+        };
+    
+        this.#elements.authors.innerHTML = this.#author ;
+        this.#elements.images.innerText = this.#image ;
+        this.#elements.titles.innerHTML = this.#title;
+      }
 }
 
  customElements.define("preview-books", customPreviewHtml);
 
- 
 /**
  * Fragments for the search and filter options being created
  * @param {object} type
