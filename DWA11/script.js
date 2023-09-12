@@ -5,21 +5,50 @@ const elements = {
     Reset: document.querySelector('[data-key="reset"]')
 };
 
-const addHandler =() => {
-   const newValue = parseInt(elements.number.value) + 1;
-   elements.number.value = newValue;
-   
-};
 
-const subtractHandler = () => {
-   const newValue = parseInt(elements.number.value) - 1;
-   elements.number.value = newValue;
-};
+/**
+ * !REDUX
+ */
 
-const resetHandler = () =>{
-   elements.number.value = 0;
-};
+let nextState= {
+  value :0
+}
 
-elements.Add.addEventListener('click', addHandler);
-elements.Subtract.addEventListener('click',subtractHandler);
-elements.Reset.addEventListener('click',resetHandler);   
+// * must not be modified 
+const initialState = {
+   value : 0
+}
+
+const increase = (state) =>{
+    nextState = {...initialState,
+   value : nextState.value + 1}
+
+   return nextState
+}
+
+const decrease = (state) =>{
+    nextState = {...initialState,
+   value : nextState.value -1};
+   return nextState;
+}
+
+const reset = (state) =>{
+   return nextState.value = 0
+
+}
+
+
+// * Store :handles all the side effects 
+const getState = (state , key)=>{
+   console.log(state[key])
+}
+
+
+increase(initialState)
+getState(increase(nextState),'value')
+decrease(nextState)
+getState(nextState,'value')
+reset(nextState)
+getState(nextState,'value')
+
+
