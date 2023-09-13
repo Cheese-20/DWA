@@ -24,12 +24,6 @@ const state = {
 }
 
 
-
-
-const store = Redux.createstore(counter , state)
-
-
-
 /**
  * !Actions
  * *when something is happening
