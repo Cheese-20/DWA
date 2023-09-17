@@ -33,20 +33,18 @@ class CounterSet extends LitElement{
     render() {
         return html `
     <input
-        class="counter__value"
+       
         data-key="number"
         readonly
         .value="${this.number}" />
-    <div class="counter__actions">
+    <div >
         <button
-          class="counter__button counter__button_first"
           data-key="subtract"
           @click="${this.subtractHandler}"
           ?disabled="${this.number <= MIN_NUM}">
           -
         </button>
         <button
-          class="counter__button"
           data-key="add"
           @click="${this.addHandler}"
           ?disabled="${this.number >= MAX_NUM}">
@@ -54,6 +52,6 @@ class CounterSet extends LitElement{
         </button>
     </div>`
     }
-}
+};
 
 customElements.define("counter-app", CounterSet);
