@@ -31,18 +31,13 @@ const capeFilter = provinces.filter((item, index) =>{
 console.log(capeFilter.length)
 
 // ! contains s
-const sCharacter = names.map((item) =>{
-    return item.split('').some(string=>{
-        string.toUpperCase()==='S'
-    });
-});
-console.log(sCharacter)
+const sCharacter  = names.map(name => name.includes('s') || name.includes('S'));
+console.log(sCharacter);
 
-// const hasSCharacter = names.map(name => name.split('').some(char => char.toUpperCase() === 'S'));
 
-// const individualsProvince = names.reduce((provinceObj, name, index) => {
-//     provinceObj[name] = provinces[index];
-//     return provinceObj }, 
-//     {});
+const provinceAndName = names.reduce((acc, name, index) => {
+    acc[name] = provinces[index];
+    return acc;
+  }, {});
   
-//   console.log('individualsProvince: ', individualsProvince);
+  console.log(provinceAndName);

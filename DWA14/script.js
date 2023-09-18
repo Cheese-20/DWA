@@ -11,10 +11,12 @@ const MIN_NUM = -10;
 const STEP_AMOUNT = 1;
 
 class CounterSet extends LitElement{
+  // defining the properties
     static get properties () {
         return {number: { type: Number }}
       };
 
+    
       subtractHandler() {
         this.number -= STEP_AMOUNT;
         this.requestUpdate();
@@ -24,12 +26,13 @@ class CounterSet extends LitElement{
         this.number += STEP_AMOUNT;
         this.requestUpdate();
       };
-
+      // initializing the state
       constructor (){
         super();
         this.number = 0;
       };
 
+      // creating the template for the html
     render() {
         return html `
     <input
